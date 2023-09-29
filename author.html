@@ -8,32 +8,31 @@
 <h2>Author entry Lakshmi Manasa Gundala</h2>
 
 <form>
-    <label for="form1_age">What is your age </label>
-    <input type ="number" id="form1_age" name="form1_age" min=10 max=50 step=2 value=30> <br>
-
-    <label for="form1_nick">What is your nickname </label>
-    <input type ="text" id="form1_nick" name="form1_nick" autofocus> <br>
-
-    <input type="button" onclick="resolveForm()" value="Get values from form">
+    <label for="form1_author">The hidden author name </label>
+    <input type ="password" id="form1_author" name="form1_author" value="Dickens"> <br>
+    <label for="form1_guess">Guess the author </label>
+    <input type ="text" id="form1_guess" name="form1_guess" autofocus> <br>
+    <input type="button" onclick="checkAuthor()" value="Check the guess">
 </form>
-
-
-<p id="result">This text will be replaced </p>
-
+<p id="guess">Result</p>
 <script> 
-
-function resolveForm (){
+var good=0
+var oops=0
+   function checkAuthor(){
     console.log("Getting form values")
-    age = document.getElementById("form1_age").value
-    nick = document.getElementById("form1_nick").value
-    confirmed = confirm("Are these the values? "+age+" and "+nick)
+    author = document.getElementById("form1_author").value
+    guess = document.getElementById("form1_guess").value
     
-    out = document.getElementById("result")
-    if(confirmed){
-        out.innerHTML = "Values were confirmed"
+    out = document.getElementById("guess")
+    if(author==guess){
+        alert("You got it right")
+        good++
     } else {
-        out.innerHTML = "Values were not confirmed"
+        oops++
+        alert("Sorry")
+
     }
+    out.innerHTML="Good count"+good
 }
 </script>
 
