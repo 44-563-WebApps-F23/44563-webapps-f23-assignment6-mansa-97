@@ -35,6 +35,30 @@ var oops=0
     out.innerHTML="Good count"+good
 }
 </script>
+<div class="container">
+    <img class="rounded" id="image" src="Alexandria.jpg" height="100" weight="100" onclick="selectImage()">
+</div>
+<script>
+    var useImage=1
+    var img=document.getElementById("image")
+    function selectImage(){
+        switch(useImage){
+            case 1:
+                img.src="Udhampur.jpg"
+                useImage++
+                break
+            case 2:
+                img.src="lincoln.jpg"
+                useImage++
+                break
+            case 3:
+                img.src="Alexandria.jpg"
+                useImage++
+                break
+            default:
+        }
+    }
+</script>
 
 </body>
 </html> 
