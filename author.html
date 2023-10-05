@@ -2,6 +2,7 @@
 <html>
  <head>
     <title>Author Html</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
  </head>
 <body>
 
@@ -12,31 +13,51 @@
     <input type ="password" id="form1_author" name="form1_author" value="Dickens"> <br>
     <label for="form1_guess">Guess the author </label>
     <input type ="text" id="form1_guess" name="form1_guess" autofocus> <br>
-    <input type="button" onclick="checkAuthor()" value="Check the guess">
+    <input type="button" id="button" onclick="checkAuthor()" value="Check the guess">
 </form>
-<p id="guess">Result</p>
+<div class="alert alert-danger mt-3" id="incorrect" style="display:none;">
+    No.of Incorrect Guesses: <span id="count">0</span>
+</div>
+
+<div class="alert alert-warning mt-3" id="ranoutguess" style="display:none;">
+    Sorry, ran out of guesses.
+</div>
+
+<p id="result1">Result</p>
 <script> 
-var good=0
-var oops=0
-   function checkAuthor(){
+good=0
+oops=0
+incorrect=0
+function checkAuthor(){
     console.log("Getting form values")
     author = document.getElementById("form1_author").value
     guess = document.getElementById("form1_guess").value
     
-    out = document.getElementById("guess")
+    out = document.getElementById("result1")
     if(author==guess){
         alert("You got it right")
         good++
     } else {
         oops++
         alert("Sorry")
+        incorrect++
+                document.getElementById("count").textContent = incorrect
+                if (incorrect === 7) {
+                    document.getElementById("ranoutguess").style.display = "block";
+                    document.getElementById("button").onclick = function () {
+                        alert("Sorry, ran out of guesses.")
+                    }
+                } else {
+                    document.getElementById("incorrect").style.display = "block"
+                }
 
     }
-    out.innerHTML="Good count"+good
+    
+    out.innerHTML="Good count:"+good
 }
 </script>
-<div class="container">
-    <img class="rounded" id="image" src="Alexandria.jpg" height="100" weight="100" onclick="selectImage()">
+<div id="container">
+    <img id="image" src="Alexandria.jpg" height="100" weight="100" onclick="selectImage()">
 </div>
 <script>
     var useImage=1
@@ -45,15 +66,15 @@ var oops=0
         switch(useImage){
             case 1:
                 img.src="Udhampur.jpg"
-                useImage++
+                useImage=2
                 break
             case 2:
                 img.src="lincoln.jpg"
-                useImage++
+                useImage=3
                 break
             case 3:
                 img.src="Alexandria.jpg"
-                useImage++
+                useImage=1
                 break
             default:
         }
